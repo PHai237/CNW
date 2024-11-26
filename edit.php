@@ -2,6 +2,60 @@
 <?php include 'products.php'; ?>
 
 <?php
+// Đây là code sử dụng products.db
+/*
+$error_message = "";
+
+if (!isset($_GET['index']) || !is_numeric($_GET['index'])) {
+    $error_message = "Sản phẩm không hợp lệ!";
+} else {
+    $index = (int) $_GET['index'];
+
+    $stmt = $pdo->prepare("SELECT * FROM products WHERE id = :id");
+    $stmt->execute([':id' => $index + 1]);
+    $current_product = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$current_product) {
+        $error_message = "Sản phẩm không tồn tại!";
+    } else {
+        $current_name = $current_product['name'];
+        $current_price = str_replace(" VND", "", $current_product['price']);
+    }
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit'])) {
+    $new_name = htmlspecialchars(trim($_POST['name'] ?? ''));
+    $new_price = htmlspecialchars(trim($_POST['price'] ?? ''));
+
+    if (!empty($new_name) && !empty($new_price)) {
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM products WHERE LOWER(name) = LOWER(:name) AND id != :id");
+        $stmt->execute(['name' => $new_name, ':id' => $index + 1]);
+        $exists = $stmt->fetchColumn();
+
+        if ($exists) {
+            $error_message = "Sản phẩm '$new_name' đã tồn tại. Vui lòng nhập tên sản phẩm khác!";
+        } else {
+            $stmt = $pdo->prepare("UPDATE products SET name = :name, price = :price WHERE id = :id");
+            $success = $stmt->execute([
+                ':name' => $new_name,
+                ':price' => $new_price . ' VND',
+                ':id' => $index + 1
+            ]);
+
+            if ($success) {
+                header("Location: index.php");
+                exit();
+            } else {
+                $error_message = "Có lỗi xảy ra khi sửa sản phẩm!";
+            }
+        }
+    } else {
+        $error_message = "Vui lòng điền đầy đủ thông tin!";
+    }
+}
+*/
+
+// Đây là code sử dụng products.json
 $error_message = "";
 
 if (!isset($_GET['index']) || !is_numeric($_GET['index'])) {
@@ -22,7 +76,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit'])) {
     $new_name = htmlspecialchars(trim($_POST['name'] ?? ''));
     $new_price = htmlspecialchars(trim($_POST['price'] ?? ''));
 
-    // Kiểm tra tính hợp lệ
     if (!empty($new_name) && !empty($new_price)) {
         foreach ($products as $i => $product) {
             if ($i !== $index && strtolower($product['name']) === strtolower($new_name)) {

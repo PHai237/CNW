@@ -2,6 +2,39 @@
 <?php include 'products.php'; ?>
 
 <?php
+// Đây là code sử dụng products.db
+/*
+$error_message = "";
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add'])) {
+    $name = htmlspecialchars($_POST['name']);
+    $price = htmlspecialchars($_POST['price']);
+
+    if (!empty($name) && !empty($price)) {
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM products WHERE LOWER(name) = LOWER(:name)");
+        $stmt->execute([':name' => $name]);
+        $exists = $stmt->fetchColumn();
+
+        if ($exists) {
+            $error_message = "Sản phẩm '$name' đã tồn tại. Vui lòng nhập sản phẩm khác!";
+        } else {
+            $stmt = $pdo->prepare("INSERT INTO products (name, price) VALUES (:name, :price)");
+            $success = $stmt->execute([':name' => $name, ':price' => $price . ' VND']);
+
+            if ($success) {
+                header("Location: index.php");
+                exit();
+            } else {
+                $error_message = "Có lỗi xảy ra khi thêm sản phẩm!";
+            }
+        }
+    } else {
+        $error_message = "Vui lòng điền đầy đủ thông tin sản phẩm!";
+    }
+}
+*/
+
+// Đây là code sử dụng products.json
 $error_message = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add'])) {
