@@ -3,7 +3,10 @@
 
 <main>
     <a href="add.php" style="text-decoration:none" class="btn-add">Thêm mới</a>
-    </form>
+    
+    <?php if (empty($products)): ?>
+        <p style="text-align: center; margin-top: 80px; font-size:30px; font-weight: bold">Hiện tại không có sản phẩm nào.</p>
+    <?php else: ?>
     <table>
         <thead>
             <tr>
@@ -18,7 +21,6 @@
             <tr>
                 <td><?= htmlspecialchars($product['name']) ?></td>
                 <td><?= htmlspecialchars($product['price']) ?></td>
-                
                 <td>
                     <a href="edit.php?index=<?= $index ?>" style="text-decoration:none" class="btn-edit">📝</a>
                 </td>
@@ -32,6 +34,7 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+    <?php endif; ?>
 </main>
 
 <style>
@@ -72,7 +75,7 @@
     .btn-edit, .btn-delete {
         padding: 5px 10px;
         border: none;
-        border-radius: 50px;
+        border-radius: 4px;
         cursor: pointer;
     }
     .btn-edit {

@@ -4,33 +4,48 @@
 <?php
 $error_message = "";
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add'])) {
-    $name = htmlspecialchars($_POST['name']);
-    $price = htmlspecialchars($_POST['price']);
+if (!isset($_GET['index']) || !is_numeric($_GET['index'])) {
+    $error_message = "Sản phẩm không hợp lệ!";
+} else {
+    $index = (int) $_GET['index'];
 
-    if (!empty($name) && !empty($price)) {
-        foreach ($products as $product) {
-            if (strtolower($product['name']) === strtolower($name)) {
-                $error_message = "Sản phẩm '$name' đã tồn tại. Vui lòng nhập sản phẩm khác!";
+    if (!isset($products[$index])) {
+        $error_message = "Sản phẩm không tồn tại!";
+    } else {
+        $current_product = $products[$index];
+        $current_name = $current_product['name'];
+        $current_price = str_replace(" VND", "", $current_product['price']);
+    }
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit'])) {
+    $new_name = htmlspecialchars(trim($_POST['name'] ?? ''));
+    $new_price = htmlspecialchars(trim($_POST['price'] ?? ''));
+
+    // Kiểm tra tính hợp lệ
+    if (!empty($new_name) && !empty($new_price)) {
+        foreach ($products as $i => $product) {
+            if ($i !== $index && strtolower($product['name']) === strtolower($new_name)) {
+                $error_message = "Sản phẩm '$new_name' đã tồn tại. Vui lòng nhập tên sản phẩm khác!";
                 break;
             }
         }
 
         if (empty($error_message)) {
-            $price .= ' VND';
-            $products[] = ["name" => $name, "price" => $price];
+            $products[$index]['name'] = $new_name;
+            $products[$index]['price'] = $new_price . ' VND';
             save($products);
             header("Location: index.php");
             exit();
         }
     } else {
-        $error_message = "Vui lòng điền đẩy đủ thông tin sản phẩm!";
+        $error_message = "Vui lòng điền đầy đủ thông tin!";
     }
 }
 ?>
 
 <main>
-    <h2>Thêm sản phẩm mới</h2>
+    <h2>Sửa Sản Phẩm</h2>
 
     <?php if (!empty($error_message)): ?>
         <div class="error-message">
@@ -40,12 +55,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add'])) {
 
     <form method="post" class="product-form">
         <label for="name">Tên sản phẩm:</label>
-        <input type="text" name="name" id="name" placeholder="Nhập tên sản phẩm" required>
+        <input type="text" name="name" id="name" value="<?= htmlspecialchars($new_name ?? $current_name ?? '') ?>" required>
         <br>
         <label for="price">Giá thành:</label>
-        <input type="text" name="price" id="price" placeholder="Nhập giá sản phẩm" required>
+        <input type="text" name="price" id="price" value="<?= htmlspecialchars($new_price ?? $current_price ?? '') ?>" required>
         <br>
-        <button type="submit" name="add" class="btn-submit">Thêm sản phẩm</button>
+        <button type="submit" name="edit" class="btn-submit">Sửa sản phẩm</button>
     </form>
 </main>
 
@@ -60,10 +75,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add'])) {
     }
 
     h2 {
-        text-align: center;
-        font-size: 30px;
+        font-size: 24px;
         color: #333;
-        margin: 10px 0 30px;
+        text-align: center;
+        margin-bottom: 20px;
     }
 
     .product-form {
@@ -91,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add'])) {
 
     .btn-submit {
         padding: 10px 15px;
-        background-color: #28a745;
+        background-color: #ffc107;
         color: white;
         border: none;
         border-radius: 5px;
@@ -100,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add'])) {
     }
 
     .btn-submit:hover {
-        background-color: #218838;
+        background-color: #e0a800;
     }
 
     .error-message {

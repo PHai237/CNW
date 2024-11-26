@@ -6,11 +6,17 @@ $products = [
 ];
 
 function save($products) {
-    file_put_contents('products.json', json_encode($products,JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+    if (file_put_contents('products.json', json_encode($products,JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)) === false) {
+        die("Không thể lưu dữ liệu vào file products.json!");
+    }
 }
 
 function load() {
     if(file_exists('products.json')) {
+        $data = file_get_contents('products.json');
+        if ($data === false) {
+            die("Không thể đọc file products.json!");
+        }
         return json_decode(file_get_contents('products.json'), true);
     }
     return [];
