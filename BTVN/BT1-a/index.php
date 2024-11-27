@@ -4,19 +4,19 @@
 <main>
     <div class="container">
         <div class="add">
-            <a href="" class="add-btn">Thêm mới</a>
+            <a href="" class="add-btn">Add New</a>
         </div>
 
         <?php if (empty($products)): ?>
-            <p>Hiện tại không có sản phẩm nào.</p>
+            <p>Currently, there are no products available.</p>
         <?php else: ?>
         <table>
             <thead>
                 <tr>
-                    <th>Sản phẩm</th>
-                    <th>Giá thành</th>
-                    <th>Sửa</th>
-                    <th>Xóa</th>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
 
@@ -26,12 +26,12 @@
                     <td><?= htmlspecialchars($product['name']) ?></td>
                     <td><?= htmlspecialchars($product['price']) ?></td>
                     <td>
-                        <a href="" class="edit-btn">📝</a>
+                        <a href="" class="edit-btn">📖</a>
                     </td>
                     <td>
-                        <form action="" method="post" class="del-form" onsubmit="return confirm('Bạn muốn xóa sản phẩm này?')">
+                        <form action="" method="post" class="del-form"">
                             <input type="hidden" name="index" value="<?= $index ?>">
-                            <button type="submit" class="del-btn">🗑️</button>
+                            <button type="submit" class="del-btn">⚔️</button>
                         </form>
                     </td>
                 </tr>
@@ -134,6 +134,7 @@
         cursor: pointer;
         text-decoration: none;
         font-weight: bold;
+        font-size: 18px;
     }
 
     .edit-btn:hover {
@@ -147,6 +148,7 @@
         border-radius: 4px;
         cursor: pointer;
         font-weight: bold;
+        font-size: 18px;
         border: none;
     }
 
