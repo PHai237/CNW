@@ -25,9 +25,9 @@
                     <a href="edit.php?index=<?= $index ?>" style="text-decoration:none" class="btn-edit">📝</a>
                 </td>
                 <td>
-                    <form action="delete.php" method="post" style="display: inline">
+                    <form action="delete.php" method="post" style="display: inline" onclick="return confirm('Bạn muốn xóa sản phẩm này?')">
                         <input type="hidden" name="index" value="<?= $index ?>">
-                        <button type="submit" class="btn-delete">🚮</button>
+                        <button type="submit" class="btn-delete">🗑️</button>
                     </form>
                 </td>
             </tr>
