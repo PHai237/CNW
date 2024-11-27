@@ -61,7 +61,10 @@
     .btn-add {
         margin-bottom: 20px;
         padding: 10px 15px;
-        margin-left: 95px;
+        margin-left: auto;
+        margin-right: auto;
+        display: inline-block;
+        text-align: center;
         background-color: #09E100;
         color: white;
         border: none;
