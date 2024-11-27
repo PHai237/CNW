@@ -3,11 +3,11 @@
 
 <main>
     <div class="container">
-        <a href="" class="add-btn">Thêm mới</a>
-        
-        <?php
-        $isEmpty = empty($products);
-        if ($isEmpty): ?>
+        <div class="add">
+            <a href="" class="add-btn">Thêm mới</a>
+        </div>
+
+        <?php if (empty($products)): ?>
             <p>Hiện tại không có sản phẩm nào.</p>
         <?php else: ?>
         <table>
@@ -19,6 +19,7 @@
                     <th>Xóa</th>
                 </tr>
             </thead>
+
             <tbody>
                 <?php foreach ($products as $index => $product): ?>
                 <tr>
@@ -28,7 +29,7 @@
                         <a href="" class="edit-btn">📝</a>
                     </td>
                     <td>
-                        <form action="" method="post" class="delete-form">
+                        <form action="" method="post" class="del-form" onsubmit="return confirm('Bạn muốn xóa sản phẩm này?')">
                             <input type="hidden" name="index" value="<?= $index ?>">
                             <button type="submit" class="del-btn">🗑️</button>
                         </form>
@@ -45,6 +46,9 @@
     main {
         padding: 20px;
         margin-top: 30px;
+        background: linear-gradient(135deg, #4b2e16, #7a5230);
+        border-radius: 10px;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
     }
 
     .container {
@@ -53,62 +57,83 @@
         align-items: stretch;
         width: 90%;
         margin: auto;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
     }
 
-    .container p {
-        text-align: center; 
-        margin-top: 80px; 
-        font-size:30px; 
-        font-weight: bold;
+    .add {
+        display: flex;
+        justify-content: flex-start;
+        margin-bottom: 20px;
     }
 
     .add-btn {
-        margin-bottom: 40px;
-        align-self: flex-start;
-        padding: 10px 15px;
-        background-color: #09E100;
+        padding: 10px 20px;
+        background: linear-gradient(135deg, #6b8e23, #556b2f);
         color: white;
-        border: none;
+        border: 2px solid #3d5221;
         border-radius: 5px;
         cursor: pointer;
-        font-size: 16px;
+        font-size: 18px;
+        font-weight: bold;
+        text-decoration: none;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
     }
 
     .add-btn:hover {
-        background-color: #06AD00;
+        background: linear-gradient(135deg, #556b2f, #3d5221);
     }
 
-    main a {
-        text-decoration: none;
+    .container p {
+        text-align: center;
+        margin-top: 80px;
+        font-size: 30px;
+        font-weight: bold;
+        color: #5b3d21;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
     }
 
     table {
         margin: auto;
         width: 100%;
         border-collapse: collapse;
+        background: rgba(255, 255, 255, 0.9);
+        border: 2px solid #7a5230;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     }
 
     table th, table td {
         border: none;
         border-bottom: 1px solid #aaa;
-        padding: 10px;
+        padding: 15px;
         text-align: left;
     }
 
     table th {
         font-size: 20px;
+        font-weight: bold;
+        background: linear-gradient(135deg, #7a5230, #4b2e16);
+        color: #fff;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
     }
 
-    .edit-btn, .del-btn{
-        padding: 5px 10px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
+    table td {
+        font-size: 16px;
+        color: #333;
     }
 
     .edit-btn {
+        padding: 5px 10px;
         background-color: #ffc107;
         color: white;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+        font-weight: bold;
     }
 
     .edit-btn:hover {
@@ -116,14 +141,22 @@
     }
 
     .del-btn {
+        padding: 5px 10px;
         background-color: #dc3545;
         color: white;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+        border: none;
     }
 
     .del-btn:hover {
         background-color: #b71c1c;
     }
-</style>
 
+    .del-form {
+        display: inline;
+    }
+</style>
 
 <?php include 'footer.php'; ?>

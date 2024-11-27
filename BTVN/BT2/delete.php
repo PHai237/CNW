@@ -20,13 +20,7 @@ if (isset($_POST['index']) && is_numeric($_POST['index'])) {
 ?>
 
 <main>
-    <h2>Xóa sản phẩm</h2>
 
-    <?php if (!empty($error_message)): ?>
-        <div class="error-message">
-            <?= $error_message ?>
-        </div>
-    <?php endif; ?>
 </main>
 
 <style>
