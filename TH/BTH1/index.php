@@ -1,5 +1,7 @@
-<?php include 'header.php'; ?>
-<?php include 'flowers.php'; ?>
+<?php 
+include 'header.php'; 
+include 'flowers.php'; 
+?>
 
 <main>
     <h1>FLOWER'S LIST</h1>
@@ -9,6 +11,19 @@
                 <img src="<?= htmlspecialchars($flower['img']); ?>" alt="<?= htmlspecialchars($flower['name']); ?>">
                 <h2><?= htmlspecialchars($flower['name']); ?></h2>
                 <p><?= htmlspecialchars($flower['description']); ?></p>
+
+                <?php if ($_SESSION['role'] === 'admin'): ?>
+                    <div class="admin-actions">
+                        <!-- Sửa -->
+                        <a href="edit.php?flower_id=<?= $flower['id']; ?>" class="action-btn edit-btn">Sửa</a>
+
+                        <!-- Xóa -->
+                        <form method="POST" action="delete.php" style="display: inline;">
+                            <input type="hidden" name="flower_id" value="<?= $flower['id']; ?>">
+                            <button type="submit" class="action-btn delete-btn">Xóa</button>
+                        </form>
+                    </div>
+                <?php endif; ?>
             </div>
         <?php endforeach; ?>
     </div>
@@ -69,8 +84,9 @@
     }
 
     .flower p {
-        font-size: 20px;
+        font-size: 18px;
         color: #f4e3c1;
+        letter-spacing: 1.5px;
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         margin: 10px 0;
     }
@@ -81,6 +97,48 @@
         object-fit: cover;
         border-radius: 8px;
         border: 2px solid #7a5230;
+    }
+
+    /* Admin actions */
+    .admin-actions {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+        gap: 10px;
+    }
+
+    .action-btn {
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        transition: background 0.3s ease, transform 0.2s ease;
+        min-width: 100px;
+    }
+
+    .edit-btn {
+        background: #4caf50;
+        color: white;
+        border: none;
+    }
+
+    .edit-btn:hover {
+        background: #45a049;
+        transform: scale(1.05);
+    }
+
+    .delete-btn {
+        background: #f44336;
+        color: white;
+        border: none;
+    }
+
+    .delete-btn:hover {
+        background: #d32f2f;
+        transform: scale(1.05);
     }
 </style>
 

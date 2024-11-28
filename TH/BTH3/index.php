@@ -1,11 +1,12 @@
 <?php
-$filename = "KTPM2.csv";
+$filename = "KTPM3.csv";
 $sinhvien = [];
 
 if (($handle = fopen($filename, "r")) !== FALSE) {
     $headers = array_map('trim', fgetcsv($handle, 1000, ","));
+
     while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-        $sinhvien[] = array_combine($headers, $data);
+        $sinhvien[] = array_combine($headers, array_map('trim', $data));
     }
 
     fclose($handle);
@@ -59,7 +60,7 @@ if (($handle = fopen($filename, "r")) !== FALSE) {
 </head>
 <body>
     <div class="container">
-        <h1>Danh sách sinh viên</h1>
+        <h1>Danh Sách Sinh Viên</h1>
         <table>
             <thead>
                 <tr>
@@ -76,13 +77,13 @@ if (($handle = fopen($filename, "r")) !== FALSE) {
                 <?php
                 foreach ($sinhvien as $sv) {
                     echo "<tr>";
-                    echo "<td>{$sv['username']}</td>";
-                    echo "<td>{$sv['password']}</td>";
-                    echo "<td>{$sv['lastname']}</td>";
-                    echo "<td>{$sv['firstname']}</td>";
-                    echo "<td>{$sv['city']}</td>";
-                    echo "<td>{$sv['email']}</td>";
-                    echo "<td>{$sv['course1']}</td>";
+                    echo "<td>{$sv['Username']}</td>";
+                    echo "<td>{$sv['Password']}</td>";
+                    echo "<td>{$sv['Lastname']}</td>";
+                    echo "<td>{$sv['Firstname']}</td>";
+                    echo "<td>{$sv['City']}</td>";
+                    echo "<td>{$sv['Email']}</td>";
+                    echo "<td>{$sv['Course1']}</td>";
                     echo "</tr>";
                 }
                 ?>

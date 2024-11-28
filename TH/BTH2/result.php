@@ -42,7 +42,6 @@ foreach ($_POST as $quest => $playerAnswer) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kết Quả Trắc Nghiệm</title>
     <style>
-        /* Cài đặt kiểu chữ và cấu hình chung */
         body {
             font-family: Arial, Helvetica, sans-serif;
             background-color: #f0f0f0;
