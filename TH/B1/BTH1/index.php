@@ -29,7 +29,10 @@ include 'flowers.php';
     </div>
 </main>
 
+<?php include 'footer.php'; ?>
+
 <style>
+    /* Tổng quan */
     body {
         font-family: "Georgia", serif;
         margin: 0;
@@ -51,6 +54,7 @@ include 'flowers.php';
         text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.8);
     }
 
+    /* Layout danh sách */
     .container {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -88,7 +92,7 @@ include 'flowers.php';
         color: #f4e3c1;
         letter-spacing: 1.5px;
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        margin: 10px 0;
+        margin: 10px 0 20px; /* Đặt khoảng cách với nút */
     }
 
     .flower img {
@@ -99,30 +103,31 @@ include 'flowers.php';
         border: 2px solid #7a5230;
     }
 
-    /* Admin actions */
+    /* Nút hành động (admin) */
     .admin-actions {
         display: flex;
-        justify-content: space-between;
-        margin-top: 10px;
-        gap: 10px;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 15px;
     }
 
     .action-btn {
-        padding: 10px 20px;
-        font-size: 16px;
+
+        font-size: 18px;
         font-weight: bold;
         border-radius: 5px;
         cursor: pointer;
         text-align: center;
         text-decoration: none;
         transition: background 0.3s ease, transform 0.2s ease;
-        min-width: 100px;
+        width: 120px;
     }
 
     .edit-btn {
         background: #4caf50;
         color: white;
         border: none;
+        height: 22px;
     }
 
     .edit-btn:hover {
@@ -141,5 +146,3 @@ include 'flowers.php';
         transform: scale(1.05);
     }
 </style>
-
-<?php include 'footer.php'; ?>

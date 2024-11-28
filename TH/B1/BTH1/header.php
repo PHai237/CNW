@@ -66,7 +66,7 @@ if (isset($_POST['logout'])) $_SESSION['role'] = 'guest';
     }
 
     .guest-btn {
-        margin-right: 10px;
+        margin-right: 40px;
     }
 
     input[type="password"] {
