@@ -17,22 +17,23 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             padding: 20px;
         }
-        .header-left {
+        .header {
             display: flex;
             align-items: center;
             gap: 20px;
         }
-        .header-left h1 {
+        .header h1 {
             font-size: 35px;
             margin: 0;
             color: black;
             font-weight: bold;
+            text-transform: uppercase;
         }
-        .header-left nav {
+        .header nav {
             display: flex;
             gap: 15px;
         }
-        .header-left nav a {
+        .header nav a {
             text-decoration: none;
             color: #555;
             font-size: 20px;
@@ -42,14 +43,14 @@
         nav a strong {
             color: black;
         }
-        .header-left nav a:hover {
+        .header nav a:hover {
             color: #007bff;
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="header-left">
+        <div class="header">
             <h1>Administration</h1>
             <nav>
                 <?php

@@ -1,9 +1,9 @@
-<div class="separator"></div>
+<div class="line"></div>
 <footer>
     <p>TLU'S MUSIC GARDEN</p>
 </footer>
 <style>
-    .separator {
+    .line {
         height: 2px;
         background-color: black;
         margin: 50px 0 15px;

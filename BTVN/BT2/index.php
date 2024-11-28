@@ -2,11 +2,13 @@
 <?php include 'products.php'; ?>
 
 <main>
-    <div class="table-container">
-        <a href="add.php" style="text-decoration:none" class="btn-add">Thêm mới</a>
+    <div class="container">
+        <a href="add.php" class="add-btn">Thêm mới</a>
         
-        <?php if (empty($products)): ?>
-            <p style="text-align: center; margin-top: 80px; font-size:30px; font-weight: bold">Hiện tại không có sản phẩm nào.</p>
+        <?php
+        $isEmpty = empty($products);
+        if ($isEmpty): ?>
+            <p>Hiện tại không có sản phẩm nào.</p>
         <?php else: ?>
         <table>
             <thead>
@@ -23,12 +25,12 @@
                     <td><?= htmlspecialchars($product['name']) ?></td>
                     <td><?= htmlspecialchars($product['price']) ?></td>
                     <td>
-                        <a href="edit.php?index=<?= $index ?>" style="text-decoration:none" class="btn-edit">📝</a>
+                        <a href="edit.php?index=<?= $index ?>" class="edit-btn">📝</a>
                     </td>
                     <td>
-                        <form action="delete.php" method="post" style="display: inline" onsubmit="return confirm('Bạn muốn xóa sản phẩm này?')">
+                        <form action="delete.php" method="post" class="delete-form">
                             <input type="hidden" name="index" value="<?= $index ?>">
-                            <button type="submit" class="btn-delete">🗑️</button>
+                            <button type="submit" class="del-btn">🗑️</button>
                         </form>
                     </td>
                 </tr>
@@ -45,8 +47,7 @@
         margin-top: 30px;
     }
 
-    /* Sử dụng flexbox để căn chỉnh nút Thêm mới trên bảng */
-    .table-container {
+    .container {
         display: flex;
         flex-direction: column;
         align-items: stretch;
@@ -54,9 +55,16 @@
         margin: auto;
     }
 
-    .btn-add {
+    .container p {
+        text-align: center; 
+        margin-top: 80px; 
+        font-size:30px; 
+        font-weight: bold;
+    }
+
+    .add-btn {
         margin-bottom: 40px;
-        align-self: flex-start; /* Đặt nút ở góc trái */
+        align-self: flex-start;
         padding: 10px 15px;
         background-color: #09E100;
         color: white;
@@ -66,8 +74,12 @@
         font-size: 16px;
     }
 
-    .btn-add:hover {
+    .add-btn:hover {
         background-color: #06AD00;
+    }
+
+    main a {
+        text-decoration: none;
     }
 
     table {
@@ -87,28 +99,28 @@
         font-size: 20px;
     }
 
-    .btn-edit, .btn-delete {
+    .edit-btn, .del-btn{
         padding: 5px 10px;
         border: none;
         border-radius: 4px;
         cursor: pointer;
     }
 
-    .btn-edit {
+    .edit-btn {
         background-color: #ffc107;
         color: white;
     }
 
-    .btn-edit:hover {
+    .edit-btn:hover {
         background-color: #e0a800;
     }
 
-    .btn-delete {
+    .del-btn {
         background-color: #dc3545;
         color: white;
     }
 
-    .btn-delete:hover {
+    .del-btn:hover {
         background-color: #b71c1c;
     }
 </style>
