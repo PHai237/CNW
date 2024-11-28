@@ -30,23 +30,11 @@ $flowers = [
     ["name" => "10. Hoa dừa cạn",
     "description" => "Hoa dừa cạn còn có các tên gọi như trường xuân hoa, dương giác, bông dừa, mỹ miều hơn thì là Hải Đằng. Hoa nở không ngừng từ mùa xuân sang mùa hè cho đến tận mùa thu. Hoa có 3 màu cơ bản là trắng, hồng nhạt và tím nhạt, lá và hoa cùng nhau vươn lên khiến cho khóm dừa cạn tuy nhỏ bé nhưng luôn tràn đầy sức sống. Loài hoa này còn tượng trưng cho sự thành đạt và có khả năng trừ tà.",
     "img" => "imgs/duacan.webp"],
-    ["name" => "11. Hoa sử quân tử",
-    "description" => "Sử quân tử là loài cây leo, hoa có cánh nhỏ xinh, màu hồng pha trắng hoặc đỏ tươi, mọc thành từng chùm khoe sắc trong nắng sớm, rung rinh trong gió. Hoa toát lên một vẻ đẹp vô cùng giản dị kèm theo mùi hương nồng đượm. Tuy nhẹ nhàng là thế nhưng sử quân tử lại có khả năng chịu được nắng nóng khắc nghiệt nên có thể trồng trong cả mùa hè.",
-    "img" => "imgs/suquantu.webp"],
-    ["name" => "12. Cúc lá nho",
-    "description" => "Cúc lá nho thuộc họ nhà Cúc, được biết đến với những bông hoa nhiều màu sắc phong phú, tươi sáng: nào là trắng, hồng cho đến tím, xanh dương,… và những chiếc lá to với hình dáng răng cưa độc đáo. Hạt cúc lá nho nảy mầm nhanh vào mùa xuân, nở hoa sang tận mùa hè lẫn mùa thu. Đây là loại hoa biểu trưng cho sự giàu có và trường thọ.",
-    "img" => "imgs/cuclanho.webp"],
-    ["name" => "13. Cẩm tú cầu",
-    "description" => "Cẩm tú cầu là loại cây thường mọc thành bụi có hoa nở to thành từng chùm và đặc biệt thích hợp với mùa hè. Hoa ưa ánh nắng mặt trời từ bình minh cho đến khi lặn xuống mỗi chiều tà. Hoa có nhiều màu sắc như trắng, tím, hồng, xanh rất nhẹ nhàng. Hoa thích hợp trồng nơi sân vườn rộng rãi hoặc chậu nhỏ để trang trí nhà ở.",
-    "img" => "imgs/camtucau.webp"],
-    ["name" => "14. Hoa cúc dại",
-    "description" => "Với phần thân mảnh mai nhưng luôn vươn lên mạnh mẽ, lại chịu được nhiệt độ cao, thậm chí là khi tiết trời hạn hán nên hoa cúc dại cực kỳ thích hợp trồng từ mùa xuân cho đến tận mùa hè nắng gắt. Hoa có màu trắng, hồng tươi sáng hay vàng cam nổi bật, không kiêu sa nhưng sức sống bền bỉ. Thậm chí khi hoa tàn, hạt rụng xuống đất lại tiếp tục phát triển vào mùa thu.",
-    "img" => "imgs/cucdai.webp"],
 ];
 
 function saveP($flowers) {
-    $dataList = json_encode($flowers, JSON_UNESCAPED_UNICODE);
-    if (file_put_contents('flowers.json', $dataList)) {
+    $dataList = json_encode($flowers,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+    if (file_put_contents('flowers.json', $dataList) === false) {
         echo "Không thể lưu dữ liệu vào file flowers.json!";
         return false;
     }
@@ -58,7 +46,16 @@ function loadP() {
         $content = file_get_contents('flowers.json');
         if ($content === false) {
             echo "Không thể đọc file flowers.json!";
+            return [];
         }
+        return json_decode($content, true);
     }
+    return [];
 }
+
+if (!file_exists('flowers.json')) {
+    saveP($flowers);
+}
+
+$flowers = loadP();
 ?>
