@@ -32,16 +32,16 @@ $flowers = [
     "img" => "imgs/duacan.webp"],
 ];
 
-function saveFlower($flowers) {
-    $dataList = json_encode($flowers,JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-    if (file_put_contents('flowers.json', $dataList) === false) {
+function save($flowers) {
+    $data = json_encode($flowers);
+    if (file_put_contents('flowers.json', $data) === false) {
         echo "Không thể lưu dữ liệu vào file flowers.json!";
         return false;
     }
     return true;
 }
 
-function loadFlower() {
+function load() {
     if (file_exists('flowers.json')) {
         $content = file_get_contents('flowers.json');
         if ($content === false) {
@@ -54,8 +54,8 @@ function loadFlower() {
 }
 
 if (!file_exists('flowers.json')) {
-    saveFlower($flowers);
+    save($flowers);
 }
 
-$flowers = loadFlower();
+$flowers = load();
 ?>
