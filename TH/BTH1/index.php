@@ -2,7 +2,7 @@
 <?php include 'flowers.php'; ?>
 
 <main>
-    <h1>FLOWER LIST</h1>
+    <h1>FLOWER'S LIST</h1>
     <div class="container">
         <?php foreach ($flowers as $flower): ?>
             <div class="flower">

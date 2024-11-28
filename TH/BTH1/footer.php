@@ -1,7 +1,7 @@
 <div class="footer">
     <div class="line"></div>
     <footer>
-        <p>FLOWERS'S SHOP</p>
+        <p>FLOWER'S SHOP</p>
     </footer>
 </div>
 
