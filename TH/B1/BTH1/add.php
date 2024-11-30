@@ -1,16 +1,31 @@
 <?php
 include 'flowers.php';
+include 'db_connect.php';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $newFlower = [
-        "id" => uniqid(),
-        "name" => htmlspecialchars($_POST['name']),
-        "description" => htmlspecialchars($_POST['description']),
-        "img" => htmlspecialchars($_POST['img'])
-    ];
-    $flowers[] = $newFlower;
-    save($flowers);
-    header('Location: index.php');
-    exit;
+    // Lấy dữ liệu từ form và bảo mật
+    $name = htmlspecialchars($_POST['name']);
+    $description = htmlspecialchars($_POST['description']);
+    $img = htmlspecialchars($_POST['img']);
+
+    // Insert dữ liệu vào cơ sở dữ liệu
+    $query = "INSERT INTO flower_view (name, description, img) VALUES ('$name', '$description', '$img')";
+
+    if (mysqli_query($conn, $query)) {
+        // Thêm vào mảng hoa và lưu lại
+        $newFlower = [
+            "id" => uniqid(),
+            "name" => $name,
+            "description" => $description,
+            "img" => $img
+        ];
+        $flowers[] = $newFlower;
+        save($flowers); // Giả sử đây là một hàm để lưu vào mảng hoặc tệp
+        header('Location: index.php');
+        exit;
+    } else {
+        echo "Error: " . $query . "<br>" . mysqli_error($conn);
+    }
 }
 ?>
 
