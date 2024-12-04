@@ -20,3 +20,4 @@ if (file_exists($controllerPath)) {
 } else {
     echo "404 Not Found: The controller does not exist.";
 }
+?>

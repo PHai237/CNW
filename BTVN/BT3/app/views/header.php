@@ -13,6 +13,7 @@
         }
         header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             padding: 20px;
@@ -46,6 +47,10 @@
         .header nav a:hover {
             color: #007bff;
         }
+
+        #time {
+            font-size: 25px;
+        }
     </style>
 </head>
 <body>
@@ -74,6 +79,27 @@
                 ?>
             </nav>
         </div>
+        <div id="time"></div>
     </header>
+
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const dayOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            const day = now.getDate();
+            const month = now.getMonth() + 1; // Thêm 1 để đúng tháng
+            const year = now.getFullYear();
+            const dayName = dayOfWeek[now.getDay()];
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+
+            const timeString = `${dayName}, ${day}/${month}/${year} - ${hours}:${minutes}:${seconds}`;
+            document.getElementById('time').innerText = timeString;
+        }
+
+        setInterval(updateTime, 1000); // Cập nhật mỗi giây
+        updateTime(); // Gọi lần đầu tiên
+    </script>
 </body>
 </html>
