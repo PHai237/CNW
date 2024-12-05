@@ -50,7 +50,6 @@ class AdminController {
         if (isset($_SESSION['user'])) {
             session_unset();
             session_destroy();
-            session_regenerate_id(true);
         }
 
         header("Location: /Tlus_Music_Garden/CNW/TH/B2/BTH3/tlunews/views/admin/login.php");
