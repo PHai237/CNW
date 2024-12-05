@@ -125,6 +125,17 @@
             border-top: 1px solid #FFD700;
             padding-top: 10px;
         }
+
+        header .actions .logout {
+            padding: 7px 12px;
+            background: linear-gradient(120deg, #0984e3, #6c5ce7);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -150,6 +161,12 @@
                 }
                 ?>
             </nav>
+        </div>
+        <div class="actions">
+            <form method="get" action="/Tlus_Music_Garden/CNW/TH/B2/BTH3/tlunews/controllers/AdminController.php">
+                <input type="hidden" name="action" value="logout">
+                <button type="submit" name="logout" class="logout">Đăng xuất</button>
+            </form>
         </div>
     </header>
 

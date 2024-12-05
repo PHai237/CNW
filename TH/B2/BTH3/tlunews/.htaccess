@@ -1,7 +1,5 @@
-# .htaccess
-
 RewriteEngine On
-RewriteRule ^index\.php$ - [L]
+RewriteBase /Tlus_Music_Garden/CNW/TH/B2/BTH3/tlunews/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /index.php [L]
+RewriteRule . index.php [L]

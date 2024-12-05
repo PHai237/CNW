@@ -3,153 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User</title>
+    <title>Admin</title>
     <style>
         body {
             margin: 0;
             padding: 0;
-            height: 100%;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(120deg, #74b9ff, #a29bfe);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
+        main {
+            flex: 1;
+            padding: 20px;
+        }
+
+        /* Header */
         header {
             display: flex;
             align-items: center;
-            position: relative;
-            background-color: #4B0082;
-            border-bottom: 4px solid #8B0000;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            color: #FFD700;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
         }
 
         header .menu-bar {
             display: flex;
             align-items: center;
-            gap: 1.5vw;
+            gap: 20px;
+            flex: 1;
         }
 
         header .menu-bar h1 {
-            font-size: 1.8vw;
+            font-size: 50px;
             text-transform: uppercase;
             color: #FFD700;
-            padding: 0 1vw;
-            word-spacing: 2px;
+            margin: 0;
+            padding: 0 1%;
         }
 
-        header .menu-bar nav a {
-            text-decoration: none;
+        header .menu-bar nav span {
             text-transform: uppercase;
-            padding-right: 1vw;
-            font-size: 1.1vw;
-            color: #E6E6FA;
-            transition: color 0.3s ease, font-weight 0.3s ease;
-        }
-
-        header .menu-bar nav a:hover {
-            color: #B0C4DE;
-            text-shadow: 0 0 1px #FFFFFF;
-        }
-
-        header .menu-bar nav a.active {
-            font-weight: bold;
-            color: #A9A9A9;
-            text-shadow: 0 0 10px #708090;
-        }
-
-        footer {
-            width: 100%;
-            text-align: center;
-            margin-top: auto;
-            border-top: 3px solid #8B0000;
             font-size: 20px;
-            bottom: 0;
-            position: absolute;
-            background-color: #191970;
-            color: #FFD700;
-            padding: 10px 0;
+            color: #E6E6FA;
+            padding: 5px 10px;
+            margin-right: 7px;
+            border-radius: 8px;
+            transition: color 0.3s, background-color 0.3s;
+            cursor: pointer;
         }
 
-        footer h3 {
-            font-weight: 100;
-            font-size: 35px;
-            line-height: 1vw;
-            font-variation-settings: 'wght'100, 'wdth'85;
-            letter-spacing: 1.5px;
-            color: #FFD700;
+        header .menu-bar nav span:hover {
+            background-color: #6c5ce7;
+            color: #fff;
         }
 
-        footer h3 .char {
+        header .menu-bar nav span.active {
+            background-color: #74b9ff;
+            color: #333;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #FFD700;
+            padding: 20px 5%;
+            text-align: center;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .footer-container div {
+            flex: 1 1 30%;
+            margin: 10px;
+            text-align: left;
+        }
+
+        .footer-container h4 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .footer-container p, .footer-container ul {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .footer-container ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-container ul li a {
+            text-decoration: none;
+            color: #FFD700;
+            transition: color 0.3s ease;
+        }
+
+        .footer-container ul li a:hover {
+            color: #A9A9A9;
+        }
+
+        .icons a {
+            margin: 0 10px;
             display: inline-block;
-            --delay:calc((var(--char-index) + 1) * 200ms);
-            animation: breathe 4000ms infinite both;
-            animation-delay: var(--delay);
+            width: 25px;
+            height: 25px;
         }
 
-        @keyframes breathe {
-            0% {
-                opacity: 0;
-                transform: scale(0.9);
-            }
+        .copyright {
+            border-top: 1px solid #FFD700;
+            padding-top: 10px;
+        }
 
-            50% {
-                opacity: 1;
-                transform: scale(1);
-            }
-
-            100% {
-                opacity: 0;
-                transform: scale(0.9);
-            }
+        header .actions .logout {
+            padding: 7px 12px;
+            background: linear-gradient(120deg, #0984e3, #6c5ce7);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
 <body>
     <header>
         <div class="menu-bar">
-            <h1>Shopping is life</h1>
+            <h1>Web Báo</h1>
             <nav>
                 <?php
                 $current_page = $_GET['page'] ?? 'home';
 
                 $menuItems = [
-                    ["Trang Chủ", "?page=home"],
-                    ["Phổ Biến", "?page=hot"],
-                    ["Giỏ Hàng", "?page=cart"],
-                    ["Tài Khoản", "?page=info"]
+                    ["Trang Chủ", "home"],
+                    ["Tin Mới", "news"],
+                    ["Tin Nổi Bật", "trending"],
+                    ["Danh Mục", "categories"],
+                    ["Liên Hệ", "contact"]
                 ];
 
                 foreach ($menuItems as $item) {
-                    $page = strtolower($item[0]);
-                    $link = $item[1];
-                    $class = ($current_page === ($page)) ? 'class = "active"' : '';
-
-                    echo "<a href='$link' $class>$item[0]</a>";
+                    $page = strtolower($item[1]);
+                    $class = ($current_page === $page) ? 'class="active"' : '';
+                    echo "<span $class>{$item[0]}</span>";
                 }
                 ?>
             </nav>
         </div>
+        <div class="actions">
+            <form method="post" action="logout">
+                <button type="submit" name="logout" class="logout">Đăng xuất</button>
+            </form>
+        </div>
     </header>
 
     <main>
-
+        
     </main>
 
     <footer>
-        <h3>
-            <span class="char" style="--char-index: 0;">S</span>
-            <span class="char" style="--char-index: 1;">H</span>
-            <span class="char" style="--char-index: 2;">O</span>
-            <span class="char" style="--char-index: 3;">P</span>
-            <span class="char" style="--char-index: 4;">P</span>
-            <span class="char" style="--char-index: 5;">I</span>
-            <span class="char" style="--char-index: 6;">N</span>
-            <span class="char" style="--char-index: 7;">G</span>
-            <span class="char" style="--char-index: 8;"> </span>
-            <span class="char" style="--char-index: 9;">I</span>
-            <span class="char" style="--char-index: 10;">S</span>
-            <span class="char" style="--char-index: 11;"> </span>
-            <span class="char" style="--char-index: 12;">L</span>
-            <span class="char" style="--char-index: 13;">I</span>
-            <span class="char" style="--char-index: 14;">F</span>
-            <span class="char" style="--char-index: 15;">E</span>
-        </h3>
+        <div class="footer-container">
+            <!-- Thông tin liên hệ -->
+            <div class="contact">
+                <h4>Liên hệ với chúng tôi</h4>
+                <p>Email: support@webbao.com</p>
+                <p>Hotline: 0123-456-789</p>
+                <p>Địa chỉ: Số 1, Đường ABC, Quận XYZ, Thành phố Hà Nội</p>
+            </div>
+
+            <!-- Liên kết quan trọng -->
+            <div class="links">
+                <h4>Liên kết</h4>
+                <ul>
+                    <li><a href="">Chính sách bảo mật</a></li>
+                    <li><a href="">Điều khoản sử dụng</a></li>
+                    <li><a href="">Gửi phản hồi</a></li>
+                </ul>
+            </div>
+
+            <!-- Mạng xã hội -->
+            <div class="social">
+                <h4>Kết nối với chúng tôi</h4>
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+                <div class="icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thông tin bản quyền -->
+        <div class="copyright">
+            <p>© 2024 Web Báo. Bảo lưu mọi quyền.</p>
+        </div>
     </footer>
 </body>
 </html>
