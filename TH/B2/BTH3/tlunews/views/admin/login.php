@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #e2e2e2;
+            background: linear-gradient(120deg, #74b9ff, #a29bfe);
             margin: 0;
             padding: 0;
             display: flex;
@@ -24,11 +24,13 @@
             height: 400px;
             padding: 40px;
             transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.1);
             box-sizing: border-box;
             background-color: #333;
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);;
-            border-radius: 10px;
-            color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            color: #fff;
         }
 
         .login-box h2 {
@@ -38,13 +40,22 @@
         }
 
         .login-box input {
-            width: 50%;
+            width: 60%;
             padding: 10px;
             margin: 10px 0 20px 10px;
             border: 1px solid #ddd;
             border-radius: 5px;
-            background-color: #444;
+            background-color: rgba(255, 255, 255, 0.2);
             color: white;
+        }
+
+        .login-box input::placeholder {
+            color: #ddd;
+        }
+
+        .login-box input:focus {
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.3);
         }
 
         .login-box #password {
@@ -54,7 +65,7 @@
         .login-box button {
             width: 60%;
             padding: 10px;
-            background-color: #ff5722;
+            background: linear-gradient(120deg, #0984e3, #6c5ce7);
             border: none;
             border-radius: 5px;
             color: white;
@@ -63,14 +74,15 @@
             position: absolute;
             bottom: 40px;
             left: 20%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         .login-box button:hover {
-            background-color: #e64a19;
+            background: linear-gradient(120deg, #74b9ff, #a29bfe);
         }
 
         .error {
-            color: red;
+            color: #ff7675;
             font-size: 14px;
             margin-bottom: 20px;
             text-align: center;
