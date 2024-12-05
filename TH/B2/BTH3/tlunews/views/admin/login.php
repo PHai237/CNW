@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -93,13 +94,19 @@
     <div class="login-box">
         <h2>Login</h2>
         <div class="error">
-            <?php if (isset($error)) echo $error; ?>
+            <?php 
+                if (isset($_SESSION['error'])) {
+                    echo $_SESSION['error']; 
+                    unset($_SESSION['error']);
+                }
+            ?>
         </div>
+
         <form method="post" action="">
             <label for="username">Tên đăng nhập:</label>
             <input type="text" name="username" id="username" placeholder="Username" required>
             <br>
-            <label for="username">Mật khẩu:</label>
+            <label for="password">Mật khẩu:</label>
             <input type="password" name="password" id="password" placeholder="Password" required>
             <button type="submit">Login</button>
         </form>
