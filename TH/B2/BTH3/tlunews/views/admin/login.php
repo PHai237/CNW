@@ -3,97 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản trị viên</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <title>Document</title>
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            background-color: #e2e2e2;
             margin: 0;
             padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
         .login-box {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 400px;
+            width: 600px;
+            height: 400px;
             padding: 40px;
             transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.8);
             box-sizing: border-box;
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+            background-color: #333;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);;
             border-radius: 10px;
-        }
-
-        h1 {
-            text-align: center;
-            color: #fff;
-            margin-bottom: 20px;
-        }
-
-        label {
-            color: #fff;
-            margin-bottom: 5px;
-            font-size: 14px;
-        }
-
-        input {
-            padding: 10px;
-            margin-bottom: 20px;
-            width: 100%;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-        }
-
-        button {
-            padding: 10px;
-            width: 100%;
-            background-color: #007BFF;
             color: white;
+        }
+
+        .login-box h2 {
+            text-align: center;
+            font-size: 50px;
+            margin: 0 0 30px 0;
+        }
+
+        .login-box input {
+            width: 50%;
+            padding: 10px;
+            margin: 10px 0 20px 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #444;
+            color: white;
+        }
+
+        .login-box #password {
+            margin-left: 50px;
+        }
+
+        .login-box button {
+            width: 60%;
+            padding: 10px;
+            background-color: #ff5722;
             border: none;
             border-radius: 5px;
+            color: white;
             font-size: 16px;
             cursor: pointer;
+            position: absolute;
+            bottom: 40px;
+            left: 20%;
         }
 
-        button:hover {
-            background-color: #0056b3;
+        .login-box button:hover {
+            background-color: #e64a19;
         }
 
-        .error-message {
+        .error {
             color: red;
             font-size: 14px;
+            margin-bottom: 20px;
             text-align: center;
-        }
-
-        @media (max-width: 600px) {
-            .login-box {
-                width: 90%;
-                padding: 20px;
-            }
         }
     </style>
 </head>
 <body>
-
     <div class="login-box">
-        <h1>Đăng nhập quản trị</h1>
-        <form method="POST" action="index.php?controller=Admin&action=doLogin">
+        <h2>Login</h2>
+        <div class="error">
+            <?php if (isset($error)) echo $error; ?>
+        </div>
+        <form method="post" action="">
             <label for="username">Tên đăng nhập:</label>
-            <input type="text" id="username" name="username" required>
-
-            <label for="password">Mật khẩu:</label>
-            <input type="password" id="password" name="password" required>
-
-            <button type="submit">Đăng nhập</button>
+            <input type="text" name="username" id="username" placeholder="Username" required>
+            <br>
+            <label for="username">Mật khẩu:</label>
+            <input type="password" name="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
         </form>
-
-        <?php if (isset($error_message)): ?>
-            <p class="error-message"><?php echo $error_message; ?></p>
-        <?php endif; ?>
     </div>
-
 </body>
 </html>

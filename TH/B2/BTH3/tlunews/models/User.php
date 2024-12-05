@@ -1,24 +1,22 @@
 <?php
-require_once 'models/Database.php';
+require_once 'config/database.php';
 
 class User {
-    private $db;
+    private $conn;
+    private $table = 'users';
 
+    // Khởi tạo kết nối cơ sở dữ liệu
     public function __construct() {
-        $this->db = Database::getConnection();
+        $db = new Database();
+        $this->conn = $db->connect();
     }
 
-    // Check login
-    public function login($username, $password) {
-        if ($this->db === null) {
-            return null;
-        }
-
-        $stmt = $this->db->prepare("SELECT * FROM users WHERE username = :username AND password = :password AND role = 1");
-        $stmt->execute([
-            ':username' => $username,
-            ':password' => $password,
-        ]);
+    // Lấy thông tin người dùng từ database theo username
+    public function getUserByUsername($username) {
+        $query = "SELECT * FROM " . $this->table . " WHERE username = :username LIMIT 1";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':username', $username);
+        $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }

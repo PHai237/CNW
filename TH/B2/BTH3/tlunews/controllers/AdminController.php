@@ -1,39 +1,38 @@
 <?php
-require_once 'models/User.php';
+require_once __DIR__ . '../../models/User.php';
 
 class AdminController {
-    private $userModel;
-
-    public function __construct() {
-        $this->userModel = new User();
-    }
-
+    // Hàm xử lý đăng nhập
     public function login() {
-        require_once 'views/admin/login.php';
-    }
-
-    public function doLogin() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $username = $_POST['username'];
             $password = $_POST['password'];
 
-            $admin = $this->userModel->login($username, $password);
+            $userModel = new User();
+            $user = $userModel->getUserByUsername($username);
 
-            if ($admin) {
-                session_start();
-                $_SESSION['admin'] = $admin['id'];
-                header('Location: index.php?controller=Admin&action=dashboard');
+            if ($user) {
+                if ($password == $user['password']) {
+                    session_start();
+                    $_SESSION['user'] = $user;
+
+                    if ($user['role'] == 1) {
+                        // Nếu là admin, chuyển hướng đến trang quản lý admin
+                        header("Location: /Tlus_Music_Garden/CNW/TH/B2/BTH3/tlunews/views/admin/dashboard.php");
+                    } else {
+                        // Nếu là user, chuyển hướng đến trang chủ của user
+                        header("Location: /Tlus_Music_Garden/CNW/TH/B2/BTH3/tlunews/views/home/index.php");
+                    }
+                    exit;
+                } else {
+                    $error = "Sai mật khẩu!";
+                }
             } else {
-                $error_message = "Tên đăng nhập hoặc mật khẩu không chính xác!";
-                require_once 'views/admin/login.php';
+                $error = "Tài khoản không tồn tại!";
             }
         }
-    }
 
-    public function logout() {
-        session_start();
-        session_destroy();
-        header('Location: index.php?controller=Admin&action=login');
+        require 'views/admin/login.php';
     }
 }
 ?>
