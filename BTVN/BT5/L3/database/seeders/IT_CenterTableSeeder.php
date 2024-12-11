@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
 
-class RentersTableSeeder extends Seeder
+class IT_CenterTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,12 +16,10 @@ class RentersTableSeeder extends Seeder
         $faker = Faker::create();
 
         for ($i = 0; $i < 20; $i++) {
-            DB::table('renters')->insert([
-                'name' => $faker->name(),
-                'phone_number' => $faker->phoneNumber(),
-                'email' => $faker->unique()->safeEmail(),
-                'created_at' => now(),
-                'updated_at' => now(),
+            DB::table('it_centers')->insert([
+                'name' => $faker->company(),
+                'location' => $faker->address(),
+                'contact_email' => $faker->unique()->safeEmail(),
             ]);
         }
     }
