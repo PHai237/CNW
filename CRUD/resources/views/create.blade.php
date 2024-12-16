@@ -45,7 +45,7 @@
 
                 <div class="input-group mt-2">
                     <span class="input-group-text fw-bold bg-light">Khách hàng</span>
-                    <select class="form-select" name='customerId'>
+                    <select class="form-select" name='companyID'>
                         @foreach($customers as $item)
                         <option value="{{$item->customerId}}">{{$item->customerName}}</option>
                         @endforeach
