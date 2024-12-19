@@ -277,7 +277,7 @@ $(document).ready(function(){
 					</div>
 					
 					<div class="col-sm-6">
-						<a href="{{ route('issues.create') }}" class="btn btn-success"><i class="material-icons">&#xE147;</i> <span>Thêm máy tính mới </span></a>
+						<a href="{{ route('issues.create') }}" class="btn btn-success"><i class="material-icons">&#xE147;</i> <span>Thêm máy tính mới</span></a>
 												
 					</div>
 				</div>
