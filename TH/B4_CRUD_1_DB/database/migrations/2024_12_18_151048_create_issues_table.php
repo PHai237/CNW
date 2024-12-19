@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('computer_id')->constrained('computers')->onDelete('cascade');
             $table->string('reported_by', 50);
-            $table->dateTime('reported_date');
+            $table->date('reported_date');
             $table->text('description');
             $table->enum('urgency', ['Low', 'Medium', 'High']);
             $table->enum('status', ['Open', 'In Progress', 'Resolved']);

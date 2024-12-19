@@ -13,6 +13,18 @@ class IssuesTableSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $faker = Faker::create();
+        $computerID = DB::table('computers')->pluck('id')->toArray();
+
+        foreach(range(1, 50) as $index) {
+            DB::table('issues')->insert([
+                'computer_id' => $faker->randomElement($computerID),
+                'reported_by' => $faker->name(),
+                'reported_date' => $faker->date(),
+                'description' => $faker->sentence(),
+                'urgency' => $faker->randomElement(['Low', 'Medium', 'High']),
+                'status' => $faker->randomElement(['Open', 'In Progress', 'Resolved']),
+            ]);
+        }
     }
 }
