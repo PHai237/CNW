@@ -20,10 +20,10 @@ class IssueController extends Controller
 
     public function store(Request $request) {
         $request->validate([
-            'computer_name' => 'required|max:50',
-            'model' => 'required|max:100',
+            'computer_id' => 'required|max:50',
             'reported_by' => 'required|max:50',
             'reported_date' => 'required|date',
+            'description' => 'nullable',
             'urgency' => 'required',
             'status' => 'required',
         ]);
@@ -41,10 +41,10 @@ class IssueController extends Controller
 
     public function update(Request $request, $id) {
         $request->validate([
-            'computer_name' => 'required',
-            'model' => 'required',
+            'computer_id' => 'required',
             'reported_by' => 'required',
             'reported_date' => 'nullable|date',
+            'description' => 'nullable',
             'urgency' => 'required',
             'status' => 'required',
         ]);
