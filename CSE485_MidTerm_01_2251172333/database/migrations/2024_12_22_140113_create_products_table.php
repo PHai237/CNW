@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('product_name');
             $table->text('description');
             $table->decimal('price', 10, 2);
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->string('category_name');
         });
     }
