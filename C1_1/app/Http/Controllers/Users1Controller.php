@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Users1;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class Users1Controller extends Controller
 {
@@ -31,25 +32,18 @@ class Users1Controller extends Controller
     {
         $request->validate([
             'username' => 'required|max:100',
-            'email' => 'required|email',
-            'password' => 'required',
+            'email' => 'required|email|unique:users1,email',
+            'password' => 'required|min:6',
             'role' => 'required',
-            'created_at' => 'nullable',
-            'updated_at' => 'nullable',
         ]);
 
-        Users1::create($request->all());
+        $data = $request->all();
+        $data['password'] = Hash::make($request->password);
+
+        Users1::create($data);
 
         return redirect()->route('users1.index')->with('success', 'Người dùng đã được thêm thành công!');
     }
-
-    /**
-     * Display the specified resource.
-     */
-    // public function show(string $id)
-    // {
-    //     //
-    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -67,15 +61,21 @@ class Users1Controller extends Controller
     {
         $request->validate([
             'username' => 'required|max:100',
-            'email' => 'required|email',
-            'password' => 'required',
+            'email' => 'required|email|unique:users1,email,' . $id,
+            'password' => 'nullable|min:6',
             'role' => 'required',
-            'created_at' => 'nullable',
-            'updated_at' => 'nullable',
         ]);
 
         $users1 = Users1::findOrFail($id);
-        $users1->update($request->all());
+
+        $data = $request->all();
+        if ($request->filled('password')) {
+            $data['password'] = Hash::make($request->password);
+        } else {
+            unset($data['password']);
+        }
+
+        $users1->update($data);
 
         return redirect()->route('users1.index')->with('success', 'Người dùng đã được cập nhật thành công!');
     }
@@ -88,6 +88,6 @@ class Users1Controller extends Controller
         $users1 = Users1::findOrFail($id);
         $users1->delete();
 
-        return redirect()->route('users1.index')->with('success', 'Sản phẩm đã được xóa thành công!');
+        return redirect()->route('users1.index')->with('success', 'Người dùng đã được xóa thành công!');
     }
 }

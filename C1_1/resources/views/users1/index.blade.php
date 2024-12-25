@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Bootstrap CRUD Data Table for Products</title>
+    <title>Manage User</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -163,10 +163,10 @@
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h2>Quản Lý <b>Người dùng</b></h2>
+                            <h2>Manage <b>User</b></h2>
                         </div>
                         <div class="col-sm-6">
-                            <a href="{{ route('users1.create') }}" class="btn btn-success"><i class="material-icons">&#xE147;</i> <span>Thêm sản phẩm mới</span></a>
+                            <a href="{{ route('users1.create') }}" class="btn btn-success"><i class="material-icons">&#xE147;</i> <span>Add New</span></a>
                         </div>
                     </div>
                 </div>
@@ -184,6 +184,7 @@
                             <th>Username</th>
                             <th>Email</th>
                             <th>Role</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -194,12 +195,12 @@
                             <td>{{ $user1->email }}</td>
                             <td>{{ $user1->role }}</td>                       
                             <td>
-                                <a href="{{ route('users1.edit', $user1->id) }}" class="btn btn-primary" data-toggle="tooltip" title="Sửa">
+                                <a href="{{ route('users1.edit', $user1->id) }}" class="btn btn-primary" data-toggle="tooltip" title="Edit">
                                     <i class="fa fa-pencil"></i> <!-- Thay bằng icon -->
                                 </a>
 
                                 <!-- Nút xóa kèm modal xác nhận -->
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $user1->id }}" data-toggle="tooltip" title="Xóa">
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $user1->id }}" data-toggle="tooltip" title="Delete">
                                     <i class="fa fa-trash"></i> <!-- Thay bằng icon -->
                                 </button>
 
@@ -208,18 +209,18 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="deleteModalLabel{{ $user1->id }}">Xác nhận xóa</h5>
+                                                <h5 class="modal-title" id="deleteModalLabel{{ $user1->id }}">Confirm</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                Bạn có chắc chắn muốn xóa người dùng này không?
+                                                Do you want to delete this user?
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                                 <form action="{{ route('users1.destroy', $user1->id) }}" method="POST" style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger">Xóa</button>
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
                                                 </form>
                                             </div>
                                         </div>
