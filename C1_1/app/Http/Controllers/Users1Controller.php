@@ -36,7 +36,7 @@ class Users1Controller extends Controller
             'password' => 'required|min:6',
             'role' => 'required',
         ]);
-
+        
         $data = $request->all();
         $data['password'] = Hash::make($request->password);
 
