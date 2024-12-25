@@ -12,7 +12,7 @@
 <body>
     <div class="container-xl">
         <h1 class="mt-5">Update User</h1>
-        <form action="{{ route('users1.update', $users1->id) }}" method="POST" class="mt-4" enctype="multipart/form-data">
+        <form action="{{ route('users1.update', $users1->id) }}" method="PUT" class="mt-4" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
