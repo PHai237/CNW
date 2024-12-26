@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('courses', function (Blueprint $table) {
+        Schema::create('movies', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100);
+            $table->string('title', 50);
+            $table->string('location', 100);
+            $table->dateTime('start_datetime');
+            $table->dateTime('end_datetime');
+            $table->string('organizer_email')->unique();
             $table->text('description', 255);
-            $table->enum('difficulty', ['Beginner', 'Intermediate', 'Advanced']);
-            $table->decimal('price', 10, 2);
-            $table->date('start_date');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('courses');
+        Schema::dropIfExists('movies');
     }
 };
