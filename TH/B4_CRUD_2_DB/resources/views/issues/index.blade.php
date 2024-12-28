@@ -290,6 +290,10 @@
 		.modal form label {
 			font-weight: normal;
 		}
+
+		.btn-primary i {
+            color: white !important;
+        }
 	</style>
 	<script>
 		$(document).ready(function() {
@@ -362,11 +366,13 @@
 							<td>{{ $issue->urgency }}</td>
 							<td>{{ $issue->status }}</td>
 							<td>
-								<a href="{{ route('issues.edit', $issue->id) }}" class="btn btn-primary">Sửa</a>
+							<a href="{{ route('issues.edit', $issue->id) }}" class="btn btn-primary" data-toggle="tooltip" title="Sửa">
+                                    <i class="fa fa-pencil"></i> <!-- Thay bằng icon -->
+                                </a>
 
 								<!-- Nút xóa kèm modal xác nhận -->
-								<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $issue->id }}">
-									Xóa
+								<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $issue->id }}" data-toggle="tooltip" title="Xóa">
+									<i class="fa fa-trash"></i> <!-- Thay bằng icon -->
 								</button>
 
 								<!-- Modal xác nhận xóa -->
